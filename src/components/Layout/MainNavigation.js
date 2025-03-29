@@ -1,12 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import classes from './MainNavigation.module.css';
 import { useContext } from 'react';
 import LoginContext from '../../store/LoginContext';
-
 const MainNavigation = () => {
 
   const {token, removeToken} = useContext(LoginContext);
+  const history = useHistory()
+
+  const logoutUser = () => {
+    removeToken();
+    history.push("/")
+  }
 
   return (
     <header className={classes.header}>
@@ -25,7 +30,7 @@ const MainNavigation = () => {
                   <Link to='/profile'>Profile</Link>
                 </li>
                 <li>
-                  <button onClick={removeToken}>Logout</button>
+                  <button onClick={logoutUser}>Logout</button>
                 </li>
               </>
             )
