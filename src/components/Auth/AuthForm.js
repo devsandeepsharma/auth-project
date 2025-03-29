@@ -49,6 +49,7 @@ const AuthForm = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         addToken(user.accessToken)
+        localStorage.setItem("token", user.accessToken);
         console.log(user.accessToken)
       })
       .catch((error) => {

@@ -1,9 +1,10 @@
-import { Fragment } from 'react';
+import { Fragment, useContext, useEffect } from 'react';
 
 import MainNavigation from './MainNavigation';
 import LoginContextProvider from '../../store/LoginContextProvider';
 
 const Layout = (props) => {
+
   return (
     <LoginContextProvider>
       <MainNavigation />

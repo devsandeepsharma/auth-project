@@ -1,8 +1,9 @@
 import { Link, useHistory } from 'react-router-dom';
 
 import classes from './MainNavigation.module.css';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import LoginContext from '../../store/LoginContext';
+
 const MainNavigation = () => {
 
   const {token, removeToken} = useContext(LoginContext);
@@ -12,6 +13,13 @@ const MainNavigation = () => {
     removeToken();
     history.push("/")
   }
+
+  const {addToken} = useContext(LoginContext);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    addToken(token);
+  }, []);
 
   return (
     <header className={classes.header}>
