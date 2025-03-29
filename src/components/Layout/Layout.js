@@ -1,13 +1,14 @@
 import { Fragment } from 'react';
 
 import MainNavigation from './MainNavigation';
+import LoginContextProvider from '../../store/LoginContextProvider';
 
 const Layout = (props) => {
   return (
-    <Fragment>
+    <LoginContextProvider>
       <MainNavigation />
       <main>{props.children}</main>
-    </Fragment>
+    </LoginContextProvider>
   );
 };
 

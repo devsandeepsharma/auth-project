@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 
 import classes from './AuthForm.module.css';
+import LoginContext from "../../store/LoginContext"
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 
@@ -16,6 +17,8 @@ const firebaseConfig = {
 };
 
 const AuthForm = () => {
+
+  const {addToken} = useContext(LoginContext);
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -45,6 +48,7 @@ const AuthForm = () => {
       signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        addToken(user.accessToken)
         console.log(user.accessToken)
       })
       .catch((error) => {
