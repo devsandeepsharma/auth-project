@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 
 import classes from './AuthForm.module.css';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
@@ -42,7 +42,17 @@ const AuthForm = () => {
     }
 
     if(isLogin) {
-
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user.accessToken)
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setIsError(errorMessage);
+      }).finally(() => {
+        setIsLoading(false);
+      });
     } else {
       createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
