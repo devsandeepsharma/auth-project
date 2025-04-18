@@ -14,6 +14,7 @@ const Header = () => {
                             navbarScroll
                         >
                             <Nav.Link as={NavLink} to="/">Home</Nav.Link>
+                            <Nav.Link as={NavLink} to="/verify">Verify Email</Nav.Link>
                             <Nav.Link as={NavLink} to="/edit">Edit Profile</Nav.Link>
                             <Button 
                                 variant="light py-1 px-3 mt-2 mt-md-0" 

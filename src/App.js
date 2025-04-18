@@ -3,6 +3,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Home from "./pages/Home";
+import EditProfile from "./pages/EditProfile";
+import VerifyEmail from "./pages/VerifyEmail";
 
 const App = () => {
 
@@ -13,11 +16,15 @@ const App = () => {
       children: [
         {
           path: "/",
-          element: <h1>Home Page</h1> 
+          element: <Home />
         },
         {
           path: "/edit",
-          element: <h1>Edit Profile Page</h1> 
+          element: <EditProfile />
+        },
+        {
+          path: "/verify",
+          element: <VerifyEmail />
         },
         {
           path: "/login",
