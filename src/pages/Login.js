@@ -1,13 +1,15 @@
 import { Button, Form } from "react-bootstrap";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import formValidate from "../utils/formValidate";
 import { AuthService } from "../services/Authentication";
+import AuthContext from "../store/AuthContext";
 
 const Login = () => {
 
     const navigate = useNavigate();
+    const { addToken, addUser } = useContext(AuthContext);
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -31,8 +33,20 @@ const Login = () => {
     const loginUser = async (email, password) => {
         try {
             const user = await AuthService.login(email, password);
-            console.log(user);
-            setErrors({});
+            const token = user.user.accessToken;
+            const userData = {
+                email: user.user.email,
+                emailVerified: user.user.emailVerified,
+                displayName: user.user.displayName,
+                photoURL: user.user.photoURL,
+                uid: user.user.uid
+            }
+
+            addToken(token);
+            addUser(userData);
+            localStorage.setItem("token", token);
+            localStorage.setItem("user", JSON.stringify(userData));
+            navigate("/");
         } catch (error) {
             setErrors({
                 email: "Invalid email and password",
