@@ -76,4 +76,49 @@ That’s because React’s context doesn’t save data after refresh. And Fireba
 So I saved the user data in `localStorage` (kind of like a notebook the browser keeps). And then, when the page refreshed, I used that saved data to put the user back into the app.  
 Now it remembers who’s logged in — even after a refresh. 🎉
 
+### 📂 Why renaming files in Git wasn't as simple as I thought
+
+I renamed some files locally, thinking everything would be fine when I pushed to GitHub. But when deploying to Vercel, I hit a snag: the file names weren't updating in the repository, and the app was breaking.
+
+The issue? Git wasn't tracking the file name changes because I didn’t use the right command. Instead of just renaming the files in my file system, I needed to run git `mv` to let Git know about the rename.
+
+Here’s what I did to fix it:
+
+#### Renamed the file using git mv:
+
+```bash
+git mv src/store/authContext.js src/store/AuthContext.js
+```
+
+#### Committed the changes:
+
+```bash
+git commit -m "Renamed authContext.js to AuthContext.js"
+```
+
+#### Pushed the changes to GitHub:
+
+```bash
+git push origin main  # or the branch you're working on
+```
+
+Once I pushed the changes, Vercel redeployed the project, and everything worked smoothly.
+
+Lesson learned: Git needs a little help to track file renames properly — it’s not just about changing the names locally.
+
 ## 📸 Preview
+<img src="./public/01.png" />
+<img src="./public/02.png" />
+<img src="./public/03.png" />
+<img src="./public/04.png" />
+<img src="./public/05.png" />
+<img src="./public/06.png" />
+<img src="./public/07.png" />
+<img src="./public/08.png" />
+<img src="./public/09.png" />
+<img src="./public/10.png" />
+<img src="./public/11.png" />
+<img src="./public/12.png" />
+<img src="./public/13.png" />
+<img src="./public/14.png" />
+<img src="./public/15.png" />
