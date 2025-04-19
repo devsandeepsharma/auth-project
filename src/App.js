@@ -18,15 +18,15 @@ const App = () => {
       children: [
         {
           path: "/",
-          element: <ProtectedRoute element={<Home />} />
+          element: <ProtectedRoute><Home /></ProtectedRoute>
         },
         {
           path: "/edit",
-          element:<ProtectedRoute element={<EditProfile />} />
+          element: <ProtectedRoute><EditProfile /></ProtectedRoute>
         },
         {
           path: "/verify",
-          element: <ProtectedRoute element={<VerifyEmail />} />
+          element: <ProtectedRoute><VerifyEmail /></ProtectedRoute>
         },
         {
           path: "/login",
