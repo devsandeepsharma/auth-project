@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import EditProfile from "./pages/EditProfile";
 import VerifyEmail from "./pages/VerifyEmail";
 import AuthContextProvider from "./store/AuthContextProvider";
+import ProtectedRoute from "./components/Layout/ProtectedRoute";
 
 const App = () => {
 
@@ -17,19 +18,19 @@ const App = () => {
       children: [
         {
           path: "/",
-          element: <Home />
+          element: <ProtectedRoute element={<Home />} />
         },
         {
           path: "/edit",
-          element: <EditProfile />
+          element:<ProtectedRoute element={<EditProfile />} />
         },
         {
           path: "/verify",
-          element: <VerifyEmail />
+          element: <ProtectedRoute element={<VerifyEmail />} />
         },
         {
           path: "/login",
-          element: <Login />
+          element: <Login />s
         },
         {
           path: "/signup",
