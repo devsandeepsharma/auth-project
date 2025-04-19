@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import EditProfile from "./pages/EditProfile";
 import VerifyEmail from "./pages/VerifyEmail";
+import authContextProvider from "./store/authContextProvider";
 
 const App = () => {
 
@@ -38,7 +39,11 @@ const App = () => {
     },
 ])
 
-  return <RouterProvider router={router} />
+  return (
+    <authContextProvider>
+      <RouterProvider router={router} />
+    </authContextProvider>
+  )
 }
 
 export default App;
