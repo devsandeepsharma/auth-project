@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import EditProfile from "./pages/EditProfile";
 import VerifyEmail from "./pages/VerifyEmail";
-import authContextProvider from "./store/authContextProvider";
+import AuthContextProvider from "./store/AuthContextProvider";
 
 const App = () => {
 
@@ -40,9 +40,9 @@ const App = () => {
 ])
 
   return (
-    <authContextProvider>
+    <AuthContextProvider>
       <RouterProvider router={router} />
-    </authContextProvider>
+    </AuthContextProvider>
   )
 }
 
