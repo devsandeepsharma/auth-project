@@ -1,16 +1,21 @@
 import { useContext } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import AuthContext from "../../store/AuthContext";
-import { Navigate, Route } from "react-router-dom";
 
-const ProtectedRoute = ({element, ...rest}) => {
+const ProtectedRoute = ({element}) => {
+
     const { token } = useContext(AuthContext);
 
-    if (!token) {
-        return <Navigate to="/login" />;
-    }
-
-    return <Route {...rest} element={element}/>
+    return (
+        <Routes>
+            {
+                token 
+                ? <Route path="/" element={element} />
+                : <Route path="*" element={<Navigate to="/login" />} />
+            }
+      </Routes>
+    )
 }
 
 export default ProtectedRoute;

@@ -30,7 +30,7 @@ const App = () => {
         },
         {
           path: "/login",
-          element: <Login />s
+          element: <Login />
         },
         {
           path: "/signup",
