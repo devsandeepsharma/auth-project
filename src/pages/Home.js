@@ -1,4 +1,11 @@
+import { useContext } from "react";
+
+import AuthContext from "../store/AuthContext";
+
 const Home = () => {
+
+    const { user } = useContext(AuthContext);
+
     return (
         <div 
             style={{maxWidth: "300px"}} 
@@ -13,10 +20,11 @@ const Home = () => {
             <img 
                 style={{width: "200px", height:"200px"}} 
                 className="rounded-circle" 
-                src="https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZSUyMHBob3RvfGVufDB8fDB8fHww" 
+                src={user?.photoURL}
+                alt="Profile Photo"
             />
-            <h3 className="mt-1">Username</h3>
-            <p>Email@gmail.com</p>
+            <h3 className="mt-1">{user?.displayName}</h3>
+            <p>{user?.email}</p>
             <p className="
                 bg-secondary
                 text-white
@@ -25,7 +33,7 @@ const Home = () => {
                 rounded
             "
             >
-                Verifield
+                {user?.emailVerified ? "Verifield": "Not Verifield"}
             </p>
         </div>
     )
