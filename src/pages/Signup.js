@@ -1,22 +1,56 @@
 import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import formValidate from "../utils/formValidate";
+import { AuthService } from "../services/Authentication";
 
 const Signup = () => {
+
+    const navigate = useNavigate();
 
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const [error, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
 
     const handleFormSubmit = (e) => {
+        setErrors({});
+        setLoading(true);
         e.preventDefault();
         const getErrors = formValidate("signup",fullName, email, password);
         if(getErrors) {
             setErrors(getErrors);
+            setLoading(false);
+            return;
+        }
+
+        createUser(email, password, fullName);
+    }
+
+    const createUser = async (email, password, fullName) => {
+        try {
+            const dummyImg = "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZSUyMHBob3RvfGVufDB8fDB8fHww";
+            await AuthService.signup(email, password);
+            await AuthService.updateUserProfile(fullName, dummyImg);
+            
+            navigate("/login");
+        } catch (error) {
+            if (error.code === "auth/email-already-in-use") {
+                setErrors({ email: "This email is already in use" });
+            } else {
+                setErrors(
+                    { 
+                        fullName: "Something went wrong. Please try again." ,
+                        email: "Something went wrong. Please try again." ,
+                        password: "Something went wrong. Please try again." ,
+                    }
+                );
+            }
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -59,8 +93,10 @@ const Signup = () => {
                     {error?.password && error.password}
                 </Form.Text>
             </Form.Group>
-            <Button className="d-block w-100 mt-4" variant="dark" type="submit">
-                Signup
+            <Button className="d-block w-100 mt-4" variant="dark" type="submit"
+                disabled={loading}
+            >
+                {loading ? "Signing in": "Signup"}
             </Button>
             <p className="text-center mt-3">Already have an Account <Link to="/login">Login</Link></p>
         </Form>
