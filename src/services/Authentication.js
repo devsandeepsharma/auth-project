@@ -31,8 +31,8 @@ class Authentication {
         return sendEmailVerification(this.auth.currentUser);
     }
 
-    onAuthChange(callback) {
-        return onAuthStateChanged(this.auth, callback);
+    getCurrentUser() {
+        return this.auth.currentUser;
     }
 
     updateUserProfile(fullName, photoURL) {
